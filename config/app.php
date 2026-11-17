@@ -38,5 +38,5 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
     ],
-    'aliases' => [],
+    'aliases' => Illuminate\Support\Facades\Facade::defaultAliases()->toArray(),
 ];
