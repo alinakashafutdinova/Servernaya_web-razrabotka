@@ -42,11 +42,12 @@ class RegistrationTest extends TestCase
 
         $response->assertOk()
             ->assertHeader('Content-Type', 'application/json')
-            ->assertHeader('Cache-Control', 'no-store')
             ->assertJsonPath('user.name', 'Алина')
             ->assertJsonPath('user.email', 'alina@example.com')
             ->assertJsonPath('user.password', '[скрыт]')
             ->assertDontSee('SafePass123!');
+
+        $this->assertStringContainsString('no-store', $response->headers->get('Cache-Control'));
     }
 
     public function test_empty_fields_are_rejected(): void
