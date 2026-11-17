@@ -13,7 +13,7 @@ class PageRoutesTest extends TestCase
 
     public function test_about_page_is_available(): void
     {
-        $this->get('/about')->assertOk()->assertSee('Немного обо мне');
+        $this->get('/about')->assertOk()->assertSeeText('Немного обо мне');
     }
 
     public function test_contacts_are_rendered_from_an_array(): void
