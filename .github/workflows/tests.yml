@@ -1,0 +1,33 @@
+name: Проверка лабораторных работ
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: Проверка Laravel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получить файлы проекта
+        uses: actions/checkout@v4
+
+      - name: Подготовить PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          tools: composer:v2
+          extensions: mbstring, xml, dom, fileinfo, pdo_sqlite
+          coverage: none
+
+      - name: Установить зависимости
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Подготовить окружение
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Выполнить тесты
+        run: php artisan test

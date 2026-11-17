@@ -17,11 +17,11 @@
                     <span class="brand-caption">alina <span>•</span> web lab</span>
                 </a>
                 <nav class="navigation" aria-label="Основное меню">
-                    <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" {{ request()->routeIs('home') ? 'aria-current=page' : '' }}>Главная</a>
+                    <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home', 'galery') ? 'active' : '' }}" {{ request()->routeIs('home') ? 'aria-current=page' : '' }}>Главная</a>
                     <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" {{ request()->routeIs('about') ? 'aria-current=page' : '' }}>О нас</a>
                     <a href="{{ route('contacts') }}" class="nav-link {{ request()->routeIs('contacts') ? 'active' : '' }}" {{ request()->routeIs('contacts') ? 'aria-current=page' : '' }}>Контакты</a>
                 </nav>
-                <span class="header-note">01 / 03</span>
+                <span class="header-note">02 / 04</span>
             </div>
         </header>
 
@@ -37,7 +37,7 @@
                     <span class="footer-separator">/</span>
                     <span>Группа 257-321</span>
                 </div>
-                <span class="footer-course">Серверная веб-разработка · Лабораторная №1</span>
+                <span class="footer-course">Серверная веб-разработка · Лабораторная №2</span>
             </div>
         </footer>
     </div>

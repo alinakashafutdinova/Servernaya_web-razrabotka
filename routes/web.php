@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home')->name('home');
+Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('/galery/{id}', [MainController::class, 'gallery'])->whereNumber('id')->name('galery');
 
 Route::view('/about', 'about')->name('about');
 

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="450" viewBox="0 0 1200 750" role="img" aria-labelledby="title"><title id="title">Иллюстрация: Типографика</title>
+<defs><linearGradient id="back" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0e9"/><stop offset="1" stop-color="#fffdfd"/></linearGradient><filter id="shadow" x="-20%" y="-30%" width="140%" height="170%"><feDropShadow dx="0" dy="25" stdDeviation="25" flood-color="#b66552" flood-opacity=".10"/></filter></defs>
+<rect width="1200" height="750" fill="url(#back)"/><path d="M0 565 Q340 200 650 620 T1200 180 V750 H0Z" fill="#ffd8c7" opacity=".65"/><circle cx="1110" cy="50" r="190" fill="#ff9d81" fill-opacity=".15"/>
+<text x="92" y="106" font-size="22" font-weight="700" font-family="Arial, sans-serif" letter-spacing="4" fill="#b66552" opacity=".8">WEB / NOTE 03</text>
+<text x="91" y="329" font-size="142" font-weight="700" font-family="Arial, sans-serif" letter-spacing="-12" fill="#b66552" opacity=".94">03</text>
+<text x="95" y="398" font-size="21" font-family="Arial, sans-serif" letter-spacing="3" fill="#b66552">TYPE / 03</text>
+<path d="M92 436 H309" stroke="#ff9d81" stroke-width="5" stroke-linecap="round"/>
+<g filter="url(#shadow)"><rect x="436" y="160" width="640" height="444" rx="28" fill="#ffffff"/></g>
+<path d="M436 189 Q436 160 466 160 H1046 Q1076 160 1076 190 V221 H436Z" fill="#ffd8c7"/>
+<circle cx="478" cy="190" r="10" fill="#ff9d81"/><circle cx="509" cy="190" r="10" fill="#ffffff"/><circle cx="540" cy="190" r="10" fill="#ffffff"/>
+<rect x="717" y="181" width="250" height="16" rx="8" fill="#ffffff" fill-opacity=".77"/>
+<rect x="478" y="249" width="538" height="300" rx="22" fill="#fff0e9"/><text x="502" y="434" font-family="Arial,sans-serif" font-weight="800" font-size="169" letter-spacing="-15" fill="#b66552">Aa</text><rect x="787" y="289" width="175" height="20" rx="10" fill="#ff9d81"/><rect x="787" y="335" width="149" height="13" rx="6" fill="#b66552" opacity=".25"/><rect x="787" y="359" width="171" height="13" rx="6" fill="#b66552" opacity=".16"/><rect x="787" y="383" width="117" height="13" rx="6" fill="#b66552" opacity=".12"/><rect x="787" y="438" width="175" height="51" rx="15" fill="#ffd8c7"/>
+<rect x="92" y="667" width="1016" height="1" fill="#b66552" opacity=".16"/>
+<text x="92" y="711" font-family="Arial, sans-serif" font-size="19" letter-spacing="5" fill="#b66552" opacity=".58">ALINA • WEB LAB</text>
+<text x="1109" y="711" text-anchor="end" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#b66552" opacity=".6">2026</text>
+</svg>

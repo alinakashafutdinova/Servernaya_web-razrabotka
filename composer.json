@@ -1,8 +1,12 @@
 {
     "name": "alina/servernaya-web-razrabotka",
     "type": "project",
-    "description": "Лабораторная работа №1 по серверной веб-разработке",
-    "keywords": ["laravel", "blade", "routes"],
+    "description": "Лабораторные работы №1 и №2 по серверной веб-разработке",
+    "keywords": [
+        "laravel",
+        "blade",
+        "routes"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
@@ -32,8 +36,12 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
-        "platform": {"php": "8.0.28"},
-        "allow-plugins": {"php-http/discovery": true}
+        "platform": {
+            "php": "8.0.28"
+        },
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true

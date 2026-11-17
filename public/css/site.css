@@ -191,3 +191,42 @@ h1,h2,h3,p { margin-top: 0; }
     .footer-separator { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+
+
+/* Лабораторная №2: карточки из JSON и галерея */
+.projects-section { padding: 105px 0 116px; border-top: 1px solid var(--border); }
+.projects-intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 45px; }
+.projects-intro > div { max-width: 740px; }
+.projects-intro h2 { font-size: clamp(34px,4.5vw,56px); letter-spacing: -.065em; margin: 23px 0 17px; line-height: 1.2; }
+.projects-intro p { color: var(--muted); line-height: 1.9; font-size: 14px; margin: 0; max-width: 670px; }
+.projects-count { color: #bc9caa; font-size: 12px; font-weight: 800; letter-spacing: .04em; white-space: nowrap; padding-bottom: 7px; }
+.projects-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 47px 24px; }
+.project-card { min-width: 0; }
+.project-image-link { display: block; position: relative; overflow: hidden; aspect-ratio: 1.6; background: var(--blush); border-radius: 18px; border: 1px solid #f5eaf0; }
+.project-image-link img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+.project-image-link:hover img, .project-image-link:focus-visible img { transform: scale(1.05); }
+.project-image-badge { position: absolute; right: 17px; bottom: 17px; padding: 10px 14px; border-radius: 999px; color: var(--ink); background: #fff; font-size: 11px; font-weight: 800; box-shadow: 0 6px 23px rgba(69,30,50,.07); }
+.project-image-badge span { color: var(--pink); font-size: 15px; margin-left: 9px; }
+.project-meta { margin-top: 21px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 10px; font-weight: 800; letter-spacing: .06em; color: #bd91a4; text-transform: uppercase; }
+.project-card h3 { margin: 10px 0 10px; font-size: 22px; line-height: 1.4; letter-spacing: -.045em; }
+.project-card h3 a:hover { color: var(--pink-deep); }
+.project-card > p { font-size: 12px; color: var(--muted); line-height: 1.9; margin: 0; }
+.empty-state { padding: 40px; border-radius: 18px; background: var(--blush); color: var(--muted); text-align: center; }
+.gallery-page { padding-top: 36px; padding-bottom: 105px; }
+.breadcrumbs { display: flex; align-items: center; gap: 13px; font-size: 12px; font-weight: 700; color: #aa8a9b; }
+.breadcrumbs a { color: var(--ink); }
+.breadcrumbs a:hover { color: var(--pink-deep); }
+.gallery-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; padding: 65px 0 40px; }
+.gallery-heading > div { max-width: 770px; }
+.gallery-heading h1 { font-size: clamp(44px,6vw,77px); letter-spacing: -.07em; line-height: 1.15; margin: 21px 0 19px; }
+.gallery-heading p { font-size: 15px; line-height: 1.85; color: var(--muted); margin: 0; }
+.gallery-back { padding-bottom: 8px; border-bottom: 1px solid #e5ccd7; font-size: 12px; font-weight: 800; white-space: nowrap; }
+.gallery-back span { color: var(--pink); font-size: 20px; margin-right: 8px; }
+.gallery-back:hover { color: var(--pink-deep); }
+.gallery-figure { margin: 0; }
+.gallery-figure img { display: block; width: 100%; height: auto; border-radius: 22px; border: 1px solid var(--border); background: var(--blush); }
+.gallery-figure figcaption { margin-top: 16px; font-size: 11px; font-weight: 700; color: #a8959f; text-align: right; }
+.gallery-footer-link { margin-top: 38px; }
+@media (max-width: 960px) { .projects-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 760px) { .projects-section { padding-block: 70px; } .projects-intro { align-items: flex-start; flex-direction: column; gap: 15px; margin-bottom: 32px; } .projects-grid { gap: 35px 17px; } .project-card h3 { font-size: 19px; } .gallery-page { padding: 27px 0 70px; } .gallery-heading { padding: 43px 0 27px; align-items: flex-start; flex-direction: column; gap: 24px; } .gallery-heading p { font-size: 13px; } .gallery-figure img { border-radius: 14px; } }
+@media (max-width: 520px) { .projects-grid { grid-template-columns: 1fr; } .project-card > p { font-size: 13px; } .gallery-heading h1 { font-size: 43px; } }

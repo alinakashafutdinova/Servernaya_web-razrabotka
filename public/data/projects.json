@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "title": "Первые наброски",
+        "category": "Веб-дизайн",
+        "date": "01 / 06",
+        "description": "Пробую собирать простые экраны из понятных блоков. Сначала продумываю структуру, а уже потом добавляю цвет и детали.",
+        "preview_image": "images/gallery/preview-1.svg",
+        "full_image": "images/gallery/full-1.svg"
+    },
+    {
+        "id": 2,
+        "title": "Работа с цветом",
+        "category": "Цвет и настроение",
+        "date": "02 / 06",
+        "description": "Сравниваю оттенки, подбираю акценты и ищу спокойную палитру, в которой текст остаётся главным.",
+        "preview_image": "images/gallery/preview-2.svg",
+        "full_image": "images/gallery/full-2.svg"
+    },
+    {
+        "id": 3,
+        "title": "Типографика",
+        "category": "Шрифты и композиция",
+        "date": "03 / 06",
+        "description": "Учусь выстраивать иерархию: крупный заголовок, короткий подзаголовок и достаточно воздуха между элементами.",
+        "preview_image": "images/gallery/preview-3.svg",
+        "full_image": "images/gallery/full-3.svg"
+    },
+    {
+        "id": 4,
+        "title": "Карточки и сетки",
+        "category": "Интерфейсы",
+        "date": "04 / 06",
+        "description": "Исследую, как сетка и повторяющиеся компоненты помогают упорядочить информацию и сделать страницу удобнее.",
+        "preview_image": "images/gallery/preview-4.svg",
+        "full_image": "images/gallery/full-4.svg"
+    },
+    {
+        "id": 5,
+        "title": "Небольшие эксперименты",
+        "category": "Взаимодействие",
+        "date": "05 / 06",
+        "description": "Проверяю простые состояния кнопок, ссылок и карточек. Мне нравится, когда детали работают на общую идею.",
+        "preview_image": "images/gallery/preview-5.svg",
+        "full_image": "images/gallery/full-5.svg"
+    },
+    {
+        "id": 6,
+        "title": "Собираю всё вместе",
+        "category": "Практика",
+        "date": "06 / 06",
+        "description": "Соединяю верстку, стили и серверную логику в небольшой проект. Самое интересное — видеть готовую страницу в браузере.",
+        "preview_image": "images/gallery/preview-6.svg",
+        "full_image": "images/gallery/full-6.svg"
+    }
+]
