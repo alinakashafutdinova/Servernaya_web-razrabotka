@@ -35,7 +35,7 @@ class MainController extends Controller
             return [];
         }
 
-        if (!is_array($data) || !array_is_list($data)) {
+        if (!is_array($data) || array_keys($data) !== array_keys(array_values($data))) {
             return [];
         }
 
