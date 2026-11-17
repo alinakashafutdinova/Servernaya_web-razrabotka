@@ -21,6 +21,9 @@ jobs:
           extensions: mbstring, xml, dom, fileinfo, pdo_sqlite
           coverage: none
 
+      - name: Разрешить учебную проверку совместимости Laravel 9
+        run: composer config policy.advisories.block false
+
       - name: Установить зависимости
         run: composer install --no-interaction --prefer-dist --no-progress
 
