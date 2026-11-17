@@ -12,7 +12,7 @@
             <a class="button button-primary" href="{{ route('about') }}">Узнать обо мне <span aria-hidden="true">↗</span></a>
             <a class="text-link" href="#works">Смотреть работы <span aria-hidden="true">→</span></a>
         </div>
-        <div class="hero-micro"><span class="micro-line"></span> Студентка · Веб-технологии · Москва</div>
+        <div class="hero-micro"><span class="micro-line"></span> Алина Кашафутдинова</div>
     </div>
     <div class="hero-visual" aria-hidden="true">
         <div class="visual-grid"></div>

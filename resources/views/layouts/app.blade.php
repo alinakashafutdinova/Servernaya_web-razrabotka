@@ -20,8 +20,9 @@
                     <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home', 'galery') ? 'active' : '' }}" {{ request()->routeIs('home') ? 'aria-current=page' : '' }}>Главная</a>
                     <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" {{ request()->routeIs('about') ? 'aria-current=page' : '' }}>О нас</a>
                     <a href="{{ route('contacts') }}" class="nav-link {{ request()->routeIs('contacts') ? 'active' : '' }}" {{ request()->routeIs('contacts') ? 'aria-current=page' : '' }}>Контакты</a>
+                    <a href="{{ route('signin.create') }}" class="nav-link {{ request()->routeIs('signin.*') ? 'active' : '' }}" {{ request()->routeIs('signin.*') ? 'aria-current=page' : '' }}>Регистрация</a>
                 </nav>
-                <span class="header-note">02 / 04</span>
+                <span class="header-note">03 / 04</span>
             </div>
         </header>
 
@@ -37,7 +38,7 @@
                     <span class="footer-separator">/</span>
                     <span>Группа 257-321</span>
                 </div>
-                <span class="footer-course">Серверная веб-разработка · Лабораторная №2</span>
+                <span class="footer-course">Серверная веб-разработка · Лабораторная №3</span>
             </div>
         </footer>
     </div>
