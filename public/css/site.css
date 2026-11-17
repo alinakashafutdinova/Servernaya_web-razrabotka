@@ -230,3 +230,9 @@ h1,h2,h3,p { margin-top: 0; }
 @media (max-width: 960px) { .projects-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media (max-width: 760px) { .projects-section { padding-block: 70px; } .projects-intro { align-items: flex-start; flex-direction: column; gap: 15px; margin-bottom: 32px; } .projects-grid { gap: 35px 17px; } .project-card h3 { font-size: 19px; } .gallery-page { padding: 27px 0 70px; } .gallery-heading { padding: 43px 0 27px; align-items: flex-start; flex-direction: column; gap: 24px; } .gallery-heading p { font-size: 13px; } .gallery-figure img { border-radius: 14px; } }
 @media (max-width: 520px) { .projects-grid { grid-template-columns: 1fr; } .project-card > p { font-size: 13px; } .gallery-heading h1 { font-size: 43px; } }
+
+/* Карточки статей из JSON */
+.project-card > p { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+.gallery-heading > div { max-width: 100%; }
+.gallery-heading p { max-width: 850px; overflow-wrap: anywhere; }
+.gallery-figure img { max-height: 820px; object-fit: contain; }

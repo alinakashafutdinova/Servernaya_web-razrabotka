@@ -9,46 +9,58 @@ class MainController extends Controller
 {
     public function index(): View
     {
-        return view('home', ['projects' => $this->getProjects()]);
+        return view('home', ['articles' => $this->getArticles()]);
     }
 
     public function gallery(int $id): View
     {
-        $projects = $this->getProjects();
-        $project = collect($projects)->firstWhere('id', $id);
+        $article = collect($this->getArticles())->firstWhere('id', $id);
 
-        abort_if($project === null, 404);
+        abort_if($article === null, 404);
 
-        return view('galery', ['project' => $project]);
+        return view('galery', ['article' => $article]);
     }
 
-    private function getProjects(): array
+    private function getArticles(): array
     {
-        $path = public_path('data/projects.json');
+        $path = public_path('articles.json');
 
         if (!is_file($path) || !is_readable($path)) {
             return [];
         }
 
         try {
-            $projects = json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+            $data = json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException $exception) {
             return [];
         }
 
-        if (!is_array($projects)) {
+        if (!is_array($data) || !array_is_list($data)) {
             return [];
         }
 
-        return array_values(array_filter($projects, static function ($project): bool {
-            return is_array($project)
-                && isset($project['id'], $project['title'], $project['category'], $project['description'], $project['preview_image'], $project['full_image'])
-                && is_int($project['id'])
-                && is_string($project['title'])
-                && is_string($project['category'])
-                && is_string($project['description'])
-                && is_string($project['preview_image'])
-                && is_string($project['full_image']);
-        }));
+        $articles = [];
+
+        foreach ($data as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            foreach (['date', 'name', 'desc', 'preview_image', 'full_image'] as $field) {
+                if (!isset($item[$field]) || !is_string($item[$field])) {
+                    continue 2;
+                }
+            }
+
+            if (!preg_match('/^[a-zA-Z0-9_-]+\.(?:jpe?g|png|webp)$/i', $item['preview_image'])
+                || !preg_match('/^[a-zA-Z0-9_-]+\.(?:jpe?g|png|webp)$/i', $item['full_image'])) {
+                continue;
+            }
+
+            $item['id'] = count($articles) + 1;
+            $articles[] = $item;
+        }
+
+        return $articles;
     }
 }

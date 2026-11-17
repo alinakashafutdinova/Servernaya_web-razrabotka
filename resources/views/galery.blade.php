@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $project['title'])
+@section('title', $article['name'])
 
 @section('content')
 <section class="gallery-page container">
@@ -9,16 +9,16 @@
     </nav>
     <div class="gallery-heading">
         <div>
-            <span class="eyebrow"><span class="eyebrow-dot"></span> МОЯ ГАЛЕРЕЯ / {{ $project['category'] }}</span>
-            <h1>{{ $project['title'] }}<span class="pink-period">.</span></h1>
-            <p>{{ $project['description'] }}</p>
+            <span class="eyebrow"><span class="eyebrow-dot"></span> ГАЛЕРЕЯ / {{ $article['date'] }}</span>
+            <h1>{{ $article['name'] }}<span class="pink-period">.</span></h1>
+            <p>{{ $article['desc'] }}</p>
         </div>
-        <a class="gallery-back" href="{{ route('home') }}#works"><span aria-hidden="true">←</span> Все заметки</a>
+        <a class="gallery-back" href="{{ route('home') }}#works"><span aria-hidden="true">←</span> Все статьи</a>
     </div>
     <figure class="gallery-figure">
-        <img src="{{ asset($project['full_image']) }}" alt="Полная иллюстрация: {{ $project['title'] }}" width="1440" height="900">
-        <figcaption>Полноразмерная иллюстрация · {{ $project['category'] }}</figcaption>
+        <img src="{{ asset($article['full_image']) }}" alt="Полное изображение статьи «{{ $article['name'] }}»">
+        <figcaption>Полноразмерное изображение · {{ $article['date'] }}</figcaption>
     </figure>
-    <div class="gallery-footer-link"><a class="button button-primary" href="{{ route('home') }}#works">Вернуться к заметкам <span aria-hidden="true">↗</span></a></div>
+    <div class="gallery-footer-link"><a class="button button-primary" href="{{ route('home') }}#works">Вернуться к статьям <span aria-hidden="true">↗</span></a></div>
 </section>
 @endsection

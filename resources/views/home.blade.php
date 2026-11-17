@@ -43,31 +43,28 @@
         <div class="projects-intro">
             <div>
                 <span class="eyebrow"><span class="eyebrow-dot"></span> ДАННЫЕ ИЗ JSON</span>
-                <h2>Мои заметки <span class="serif-accent">о разработке</span></h2>
-                <p>Небольшая коллекция идей и экспериментов. Карточки формируются из JSON-файла, а по нажатию на изображение можно посмотреть его в полном размере.</p>
+                <h2>Статьи <span class="serif-accent">из файла</span></h2>
+                <p>Небольшая подборка статей. Заголовки, даты, описания и изображения автоматически загружаются из JSON. Нажми на превью, чтобы открыть полноразмерное изображение.</p>
             </div>
-            <span class="projects-count">{{ count($projects) }} / заметок</span>
+            <span class="projects-count">{{ count($articles) }} / статей</span>
         </div>
-
-        @forelse ($projects as $project)
-            @if ($loop->first)
-                <div class="projects-grid">
-            @endif
-            <article class="project-card">
-                <a href="{{ route('galery', ['id' => $project['id']]) }}" class="project-image-link" aria-label="Открыть галерею: {{ $project['title'] }}">
-                    <img src="{{ asset($project['preview_image']) }}" alt="Иллюстрация к заметке «{{ $project['title'] }}»" loading="lazy" width="720" height="450">
-                    <span class="project-image-badge">Смотреть <span aria-hidden="true">↗</span></span>
-                </a>
-                <div class="project-meta"><span>{{ $project['category'] }}</span><span>{{ $project['date'] ?? '' }}</span></div>
-                <h3><a href="{{ route('galery', ['id' => $project['id']]) }}">{{ $project['title'] }}</a></h3>
-                <p>{{ $project['description'] }}</p>
-            </article>
-            @if ($loop->last)
-                </div>
-            @endif
-        @empty
-            <p class="empty-state">Пока нет заметок. Скоро здесь появятся новые работы.</p>
-        @endforelse
+        @if (count($articles))
+            <div class="projects-grid">
+                @foreach ($articles as $article)
+                    <article class="project-card">
+                        <a href="{{ route('galery', ['id' => $article['id']]) }}" class="project-image-link" aria-label="Открыть галерею: {{ $article['name'] }}">
+                            <img src="{{ asset($article['preview_image']) }}" alt="Превью статьи «{{ $article['name'] }}»" loading="lazy">
+                            <span class="project-image-badge">Смотреть <span aria-hidden="true">↗</span></span>
+                        </a>
+                        <div class="project-meta"><span>Статья {{ str_pad($article['id'], 2, '0', STR_PAD_LEFT) }}</span><time>{{ $article['date'] }}</time></div>
+                        <h3><a href="{{ route('galery', ['id' => $article['id']]) }}">{{ $article['name'] }}</a></h3>
+                        <p>{{ $article['shortDesc'] ?? $article['desc'] }}</p>
+                    </article>
+                @endforeach
+            </div>
+        @else
+            <p class="empty-state">Статьи пока не добавлены.</p>
+        @endif
     </div>
 </section>
 
