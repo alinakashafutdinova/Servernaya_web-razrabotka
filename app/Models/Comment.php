@@ -12,6 +12,7 @@ class Comment extends Model
     protected $casts = [
         'article_id' => 'integer',
         'user_id' => 'integer',
+        'is_approved' => 'boolean',
     ];
 
     public function article(): BelongsTo

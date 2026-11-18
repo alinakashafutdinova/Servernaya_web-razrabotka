@@ -125,6 +125,15 @@ class RolesPoliciesTest extends TestCase
         ])->assertRedirect(route('news.show', $article));
         $this->assertDatabaseCount('comments', 1);
         $this->assertSame($reader->id, Comment::firstOrFail()->user_id);
+        $this->assertFalse(Comment::firstOrFail()->is_approved);
+        $this->get('/news/'.$article->id)->assertOk()
+            ->assertDontSee('<script>alert(5)</script>', false)
+            ->assertDontSee('&lt;script&gt;alert(5)&lt;/script&gt;', false)
+            ->assertSeeText('Комментарий отправлен и ожидает модерации.');
+
+        $comment = Comment::firstOrFail();
+        $comment->is_approved = true;
+        $comment->save();
         $this->get('/news/'.$article->id)->assertOk()
             ->assertDontSee('<script>alert(5)</script>', false)
             ->assertSee('&lt;script&gt;alert(5)&lt;/script&gt;', false);

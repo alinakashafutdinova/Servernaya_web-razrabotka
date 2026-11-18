@@ -36,7 +36,7 @@ class NewsController extends Controller
             ->limit(3)
             ->get();
 
-        $comments = $article->comments()->with('user')->orderByDesc('created_at')->orderByDesc('id')->get();
+        $comments = $article->comments()->where('is_approved', true)->with('user')->orderByDesc('created_at')->orderByDesc('id')->get();
 
         return view('news.show', compact('article', 'relatedArticles', 'comments'));
     }

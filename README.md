@@ -102,3 +102,14 @@
 SMTP-параметры берутся из `.env`, конфигурация транспорта находится в `config/mail.php`. Пароль почтового приложения не включён в репозиторий. Для проверки отправки используется `Mail::fake()` — тесты проверяют получателей и содержимое, не отправляя реальные письма.
 
 **Основные файлы:** `app/Mail/ArticleCreatedMail.php`, `resources/views/emails/article-created.blade.php`, `config/mail.php`, `app/Http/Controllers/NewsController.php`, `tests/Feature/ArticleMailTest.php`.
+
+
+## Лабораторная работа №9. Модерация комментариев
+
+Добавила поле `is_approved` с начальным значением `false` в таблицу `comments` через отдельную миграцию. Уже опубликованные комментарии при обновлении базы сохраняют статус одобренных.
+
+Новый комментарий записывается в базу и ожидает модерации. После отправки показывается сообщение об ожидании проверки, а на странице статьи выводятся только одобренные комментарии.
+
+Модератору доступна страница `/moderation` со списком комментариев на проверке. Здесь можно принять комментарий (он появится под статьёй) или отклонить (комментарий будет удалён). Маршруты защищены `auth:sanctum` и шлюзом `manage-comments`, формы используют CSRF.
+
+**Основные файлы:** `database/migrations/2026_11_19_000002_add_is_approved_to_comments_table.php`, `CommentController`, `NewsController`, `resources/views/comments/moderation.blade.php`, `tests/Feature/CommentModerationTest.php`.

@@ -26,6 +26,9 @@
                         <a href="{{ route('news.create') }}" class="nav-link {{ request()->routeIs('news.create') ? 'active' : '' }}">Создать новость</a>
                         <a href="{{ route('news.manage') }}" class="nav-link {{ request()->routeIs('news.manage', 'news.create', 'news.edit') ? 'active' : '' }}" {{ request()->routeIs('news.manage', 'news.create', 'news.edit') ? 'aria-current=page' : '' }}>Управление</a>
                         @endcan
+                        @can('manage-comments')
+                            <a href="{{ route('comments.moderation') }}" class="nav-link {{ request()->routeIs('comments.moderation') ? 'active' : '' }}" {{ request()->routeIs('comments.moderation') ? 'aria-current=page' : '' }}>Модерация</a>
+                        @endcan
                         <form method="post" action="{{ route('logout') }}" class="nav-logout-form">
                             @csrf
                             <button type="submit" class="nav-link nav-logout">Выйти</button>
@@ -35,7 +38,7 @@
                         <a href="{{ route('register') }}" class="nav-link {{ request()->routeIs('register', 'register.store') ? 'active' : '' }}">Регистрация</a>
                     @endauth
                 </nav>
-                <span class="header-note">08 / 08</span>
+                <span class="header-note">09 / 09</span>
             </div>
         </header>
 
@@ -51,7 +54,7 @@
                     <span class="footer-separator">/</span>
                     <span>Группа 257-321</span>
                 </div>
-                <span class="footer-course">Серверная веб-разработка · Лабораторная №8</span>
+                <span class="footer-course">Серверная веб-разработка · Лабораторная №9</span>
             </div>
         </footer>
     </div>

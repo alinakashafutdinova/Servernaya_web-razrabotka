@@ -56,3 +56,12 @@ jobs:
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
           python3 tests/http_news_crud_check.py
+
+      - name: Проверить модерацию комментариев через HTTP
+        env:
+          MAIL_MAILER: log
+        run: |
+          php artisan serve --host=127.0.0.1 --port=8182 > /tmp/moderation-check.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          python3 tests/http_moderation_check.py

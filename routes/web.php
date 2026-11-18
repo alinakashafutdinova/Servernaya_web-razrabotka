@@ -54,6 +54,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/news/{article}', [NewsController::class, 'update'])->whereNumber('article')->name('news.update');
     Route::delete('/news/{article}', [NewsController::class, 'destroy'])->whereNumber('article')->name('news.destroy');
 
+    Route::get('/moderation', [CommentController::class, 'moderation'])->name('comments.moderation');
+    Route::patch('/comments/{comment}/approve', [CommentController::class, 'approve'])
+        ->whereNumber('comment')->name('comments.approve');
+    Route::delete('/comments/{comment}/reject', [CommentController::class, 'reject'])
+        ->whereNumber('comment')->name('comments.reject');
+
     Route::post('/news/{article}/comments', [CommentController::class, 'store'])
         ->whereNumber('article')->name('comments.store');
     Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])

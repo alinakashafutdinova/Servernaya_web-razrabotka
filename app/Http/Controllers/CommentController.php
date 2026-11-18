@@ -7,6 +7,7 @@ use App\Models\Comment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {
@@ -25,7 +26,39 @@ class CommentController extends Controller
             'body' => $data['body'],
         ]);
 
-        return redirect()->route('news.show', $article)->with('status', 'Комментарий добавлен.');
+        return redirect()->route('news.show', $article)->with('status', 'Комментарий отправлен и ожидает модерации.');
+    }
+
+    public function moderation(): View
+    {
+        Gate::authorize('manage-comments');
+        $comments = Comment::query()
+            ->where('is_approved', false)
+            ->with(['user', 'article'])
+            ->orderBy('created_at')
+            ->orderBy('id')
+            ->paginate(8);
+
+        return view('comments.moderation', compact('comments'));
+    }
+
+    public function approve(Comment $comment): RedirectResponse
+    {
+        Gate::authorize('manage-comments');
+        abort_if($comment->is_approved, 404);
+        $comment->is_approved = true;
+        $comment->save();
+
+        return redirect()->route('comments.moderation')->with('status', 'Комментарий опубликован.');
+    }
+
+    public function reject(Comment $comment): RedirectResponse
+    {
+        Gate::authorize('manage-comments');
+        abort_if($comment->is_approved, 404);
+        $comment->delete();
+
+        return redirect()->route('comments.moderation')->with('status', 'Комментарий отклонён и удалён.');
     }
 
     public function edit(Comment $comment): View
