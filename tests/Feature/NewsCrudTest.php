@@ -92,7 +92,7 @@ class NewsCrudTest extends TestCase
         $this->post('/news', $data)->assertRedirect(route('news.manage'));
         $article = Article::firstOrFail();
         $this->assertFalse($article->is_published);
-        $this->get('/news/'.$article->id)->assertNotFound();
+        $this->get('/news/'.$article->id)->assertOk()->assertSeeText($article->title);
     }
 
     public function test_store_validation_rejects_wrong_data_and_preserves_input(): void
