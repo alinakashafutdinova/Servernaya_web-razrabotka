@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use App\Mail\ArticleCreatedMail;
+use App\Models\Role;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -55,7 +59,23 @@ class NewsController extends Controller
         $this->authorize('create', Article::class);
         $data = $request->validated();
         $data['is_published'] = $request->boolean('is_published');
-        Article::create($data);
+        $article = Article::create($data);
+
+        try {
+            $moderators = User::query()
+                ->whereHas('role', fn ($query) => $query->where('slug', Role::MODERATOR))
+                ->get();
+
+            foreach ($moderators as $moderator) {
+                Mail::to($moderator->email)->send(new ArticleCreatedMail($article));
+            }
+        } catch (\Throwable $exception) {
+            report($exception);
+
+            return redirect()->route('news.manage')
+                ->with('status', 'Статья сохранена, но уведомление не отправлено. Проверь настройки почты.');
+        }
+
         return redirect()->route('news.manage')->with('status', 'Статья успешно добавлена.');
     }
 

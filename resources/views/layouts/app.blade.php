@@ -35,7 +35,7 @@
                         <a href="{{ route('register') }}" class="nav-link {{ request()->routeIs('register', 'register.store') ? 'active' : '' }}">Регистрация</a>
                     @endauth
                 </nav>
-                <span class="header-note">07 / 07</span>
+                <span class="header-note">08 / 08</span>
             </div>
         </header>
 
@@ -51,7 +51,7 @@
                     <span class="footer-separator">/</span>
                     <span>Группа 257-321</span>
                 </div>
-                <span class="footer-course">Серверная веб-разработка · Лабораторная №7</span>
+                <span class="footer-course">Серверная веб-разработка · Лабораторная №8</span>
             </div>
         </footer>
     </div>

@@ -49,6 +49,8 @@ jobs:
           python3 tests/http_registration_check.py
 
       - name: Проверить CRUD и CSRF через HTTP
+        env:
+          MAIL_MAILER: log
         run: |
           php artisan serve --host=127.0.0.1 --port=8182 > /tmp/crud-check.log 2>&1 &
           SERVER_PID=$!
