@@ -69,3 +69,9 @@
 - `app/Http/Controllers/NewsController.php` — получение статей из базы данных.
 - `resources/views/news/` — список и страница отдельной статьи.
 - `tests/Feature/NewsTest.php` — проверки новостей и базы данных.
+
+## Лабораторная работа №5. Пагинация и CRUD
+
+Добавила постраничный вывод опубликованных новостей (по 6 записей) и страницу управления `/management` (по 8 записей). В `NewsController` реализованы создание, просмотр, изменение и удаление статей. Формы сделаны на Blade с CSRF-токенами и подменой методов PUT и DELETE. Проверку данных выполняет `ArticleRequest`: заголовок, краткое описание, основной текст, дата публикации и статус. При ошибках форма показывает сообщения, а после успешного действия — подтверждение.
+
+**Основные файлы:** `app/Http/Controllers/NewsController.php`, `app/Http/Requests/ArticleRequest.php`, `resources/views/news`, `resources/views/vendor/pagination/pink.blade.php`, `routes/web.php`, `tests/Feature/NewsCrudTest.php`.

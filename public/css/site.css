@@ -356,3 +356,52 @@ h1,h2,h3,p { margin-top: 0; }
     .news-related { margin-top: 0; }
     .news-story-grid .news-story-lead { font-size: 17px; }
 }
+
+
+/* Пагинация и управление статьями */
+.page-nav { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-top: 38px; }
+.page-caption { color: #9a8792; font-size: 12px; font-weight: 750; }
+.page-links { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.page-link { display: inline-flex; justify-content: center; align-items: center; min-width: 41px; height: 41px; padding-inline: 12px; border: 1px solid #f1dce6; border-radius: 12px; background: #fff; font-size: 12px; font-weight: 800; color: #65515c; transition: .2s; }
+.page-link:not(.is-disabled):not(.is-current):hover { background: #ffeaf2; color: #bd376f; }
+.page-link.is-current { background: #fa4d92; color: #fff; border-color: #fa4d92; }
+.page-link.is-disabled { opacity: .43; cursor: not-allowed; }
+.page-ellipsis { padding: 0 7px; color: #aa929e; }
+.news-admin { padding-block: 72px 110px; }
+.admin-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 26px; margin-bottom: 35px; }
+.admin-heading h1, .article-editor h1 { margin: 15px 0 13px; font-size: clamp(38px, 5vw, 63px); line-height: 1.16; letter-spacing: -.065em; }
+.admin-heading p { max-width: 620px; margin: 0; color: #82747c; line-height: 1.85; font-size: 14px; }
+.admin-heading .button { flex-shrink: 0; }
+.admin-notice { margin-bottom: 24px; border-radius: 14px; padding: 16px 21px; background: #fff0f6; border: 1px solid #f6d5e4; color: #a52e65; font-weight: 800; font-size: 13px; }
+.admin-list { border: 1px solid #f1e5ea; border-radius: 23px; background: white; overflow: hidden; }
+.admin-item { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: 26px 29px; border-bottom: 1px solid #f1e5ea; }
+.admin-item:last-child { border-bottom: 0; }
+.admin-item-info { flex: 1; min-width: 0; }
+.admin-meta { font-size: 11px; color: #a28c99; font-weight: 800; }
+.admin-item h2 { font-size: 21px; margin: 8px 0 9px; line-height: 1.35; overflow-wrap: anywhere; }
+.admin-item p { font-size: 13px; color: #7d7078; line-height: 1.65; margin: 0 0 12px; overflow-wrap: anywhere; }
+.admin-status { display: inline-block; padding: 5px 11px; font-size: 10px; font-weight: 800; border-radius: 30px; }
+.admin-status.is-public { color: #14815a; background: #e9f9f1; }
+.admin-status.is-draft { color: #aa6a23; background: #fff2df; }
+.admin-actions { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 10px 20px; }
+.admin-actions form { margin: 0; }
+.admin-link { appearance: none; border: 0; background: transparent; padding: 9px 0; color: #a63770; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+.admin-link:hover { text-decoration: underline; }
+.admin-link.danger-link { color: #b6414d; }
+.article-editor { max-width: 900px; }
+.article-editor > .eyebrow { display: flex; margin-top: 30px; }
+.article-form { border: 1px solid #f1e2e9; border-radius: 25px; background: white; padding: 34px; margin-top: 30px; }
+.article-field { margin-bottom: 23px; min-width: 0; }
+.article-field label { display: block; margin-bottom: 9px; font-size: 13px; font-weight: 800; color: #4f3f48; }
+.article-field label span { color: var(--pink); }
+.article-field input, .article-field textarea { width: 100%; border: 1px solid #e9dbe2; border-radius: 13px; background: #fffcfd; color: #3c3038; padding: 14px 15px; font: inherit; font-size: 14px; line-height: 1.6; outline: none; }
+.article-field textarea { display: block; resize: vertical; }
+.article-field input:focus, .article-field textarea:focus { border-color: #f66aa2; box-shadow: 0 0 0 3px #ffe3ef; }
+.article-field .has-error { border-color: #c84560; }
+.field-error { color: #b72e51; margin: 8px 0 0; font-size: 12px; font-weight: 700; }
+.article-form-row { display: grid; grid-template-columns: minmax(0, 1fr) 1fr; align-items: center; gap: 22px; }
+.article-checkbox { display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 750; cursor: pointer; }
+.article-checkbox input { width: 19px; height: 19px; accent-color: #fa4d92; }
+.article-form-actions { display: flex; gap: 25px; align-items: center; flex-wrap: wrap; }
+@media (max-width: 920px) { .admin-item { flex-direction: column; align-items: stretch; gap: 12px; } .admin-actions { justify-content: flex-start; } }
+@media (max-width: 660px) { .news-admin { padding-top: 47px; padding-bottom: 70px; } .admin-heading { flex-direction: column; align-items: flex-start; } .admin-heading h1,.article-editor h1 { font-size: 38px; } .article-form { padding: 22px 18px; } .article-form-row { grid-template-columns: 1fr; gap: 2px; margin-bottom: 23px; } .admin-item { padding: 20px 17px; } .page-links { gap: 5px; } .page-link { min-width: 35px; height: 37px; padding-inline: 9px; } }

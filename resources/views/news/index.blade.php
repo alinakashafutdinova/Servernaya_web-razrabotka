@@ -10,7 +10,7 @@
             <h1>Мои <span class="serif-accent">новости.</span></h1>
             <p>Здесь собраны записи из базы данных. Список формируется автоматически.</p>
         </div>
-        <span class="news-tally">{{ $articles->count() }} / записей</span>
+        <span class="news-tally">{{ $articles->total() }} / записей</span>
     </div>
 
     @if ($articles->isEmpty())
@@ -34,6 +34,9 @@
                 </article>
             @endforeach
         </div>
+    @endif
+    @if ($articles->hasPages())
+        {{ $articles->onEachSide(1)->links('vendor.pagination.pink') }}
     @endif
 </section>
 @endsection

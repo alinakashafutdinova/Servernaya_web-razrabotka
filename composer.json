@@ -1,7 +1,7 @@
 {
     "name": "alina/servernaya-web-razrabotka",
     "type": "project",
-    "description": "Лабораторные работы №1–4 по серверной веб-разработке",
+    "description": "Лабораторные работы №1–5 по серверной веб-разработке",
     "keywords": [
         "laravel",
         "blade",
