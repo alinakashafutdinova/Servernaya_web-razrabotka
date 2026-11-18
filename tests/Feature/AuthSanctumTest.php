@@ -61,8 +61,9 @@ class AuthSanctumTest extends TestCase
         $this->assertNotNull(session('sanctum_token_id'));
         $this->get('/management')->assertOk();
         $this->post('/logout')->assertRedirect(route('home'));
-        $this->assertGuest();
+        $this->assertGuest('web');
         $this->assertDatabaseCount('personal_access_tokens', 0);
+        $this->app['auth']->forgetGuards();
         $this->get('/management')->assertRedirect(route('login'));
     }
 
