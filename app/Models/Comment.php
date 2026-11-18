@@ -9,6 +9,11 @@ class Comment extends Model
 {
     protected $fillable = ['body', 'user_id'];
 
+    protected $casts = [
+        'article_id' => 'integer',
+        'user_id' => 'integer',
+    ];
+
     public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class);
