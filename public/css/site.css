@@ -405,3 +405,13 @@ h1,h2,h3,p { margin-top: 0; }
 .article-form-actions { display: flex; gap: 25px; align-items: center; flex-wrap: wrap; }
 @media (max-width: 920px) { .admin-item { flex-direction: column; align-items: stretch; gap: 12px; } .admin-actions { justify-content: flex-start; } }
 @media (max-width: 660px) { .news-admin { padding-top: 47px; padding-bottom: 70px; } .admin-heading { flex-direction: column; align-items: flex-start; } .admin-heading h1,.article-editor h1 { font-size: 38px; } .article-form { padding: 22px 18px; } .article-form-row { grid-template-columns: 1fr; gap: 2px; margin-bottom: 23px; } .admin-item { padding: 20px 17px; } .page-links { gap: 5px; } .page-link { min-width: 35px; height: 37px; padding-inline: 9px; } }
+
+
+@media (max-width: 920px) {
+    .header-inner { height: auto; min-height: 84px; flex-wrap: wrap; justify-content: center; padding-block: 16px; gap: 14px; }
+    .navigation { width: 100%; justify-content: center; flex-wrap: wrap; }
+    .nav-link { flex: 1 1 auto; text-align: center; }
+}
+@media (max-width: 520px) {
+    .nav-link { flex: 1 1 calc(50% - 8px); font-size: 12px; }
+}
