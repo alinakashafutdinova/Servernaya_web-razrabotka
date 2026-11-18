@@ -22,7 +22,10 @@
                     <a href="{{ route('contacts') }}" class="nav-link {{ request()->routeIs('contacts') ? 'active' : '' }}" {{ request()->routeIs('contacts') ? 'aria-current=page' : '' }}>Контакты</a>
                     <a href="{{ route('news.index') }}" class="nav-link {{ request()->routeIs('news.*') ? 'active' : '' }}" {{ request()->routeIs('news.*') ? 'aria-current=page' : '' }}>Новости</a>
                     @auth
+                        @can('create', App\Models\Article::class)
+                        <a href="{{ route('news.create') }}" class="nav-link {{ request()->routeIs('news.create') ? 'active' : '' }}">Создать новость</a>
                         <a href="{{ route('news.manage') }}" class="nav-link {{ request()->routeIs('news.manage', 'news.create', 'news.edit') ? 'active' : '' }}" {{ request()->routeIs('news.manage', 'news.create', 'news.edit') ? 'aria-current=page' : '' }}>Управление</a>
+                        @endcan
                         <form method="post" action="{{ route('logout') }}" class="nav-logout-form">
                             @csrf
                             <button type="submit" class="nav-link nav-logout">Выйти</button>
@@ -32,7 +35,7 @@
                         <a href="{{ route('register') }}" class="nav-link {{ request()->routeIs('register', 'register.store') ? 'active' : '' }}">Регистрация</a>
                     @endauth
                 </nav>
-                <span class="header-note">06 / 06</span>
+                <span class="header-note">07 / 07</span>
             </div>
         </header>
 
@@ -48,7 +51,7 @@
                     <span class="footer-separator">/</span>
                     <span>Группа 257-321</span>
                 </div>
-                <span class="footer-course">Серверная веб-разработка · Лабораторная №6</span>
+                <span class="footer-course">Серверная веб-разработка · Лабораторная №7</span>
             </div>
         </footer>
     </div>

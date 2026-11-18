@@ -43,5 +43,53 @@
             @endif
         </aside>
     </div>
+
+    <section class="comments-section" id="comments" aria-labelledby="comments-title">
+        <div class="comments-head">
+            <span class="eyebrow"><span class="eyebrow-dot"></span> ОБСУЖДЕНИЕ</span>
+            <h2 id="comments-title">Комментарии <span class="comments-count">{{ $comments->count() }}</span></h2>
+        </div>
+
+        @if (session('status'))
+            <div class="admin-notice" role="status">{{ session('status') }}</div>
+        @endif
+
+        @auth
+            @can('create', [App\Models\Comment::class, $article])
+                <form class="comment-form" action="{{ route('comments.store', $article) }}" method="post">
+                    @csrf
+                    <label for="comment-body">Оставить комментарий</label>
+                    <textarea id="comment-body" name="body" maxlength="1000" minlength="3" required placeholder="Поделитесь мнением о статье...">{{ old('body') }}</textarea>
+                    @error('body')<p class="form-error" role="alert">{{ $message }}</p>@enderror
+                    <button type="submit" class="button button-primary">Отправить комментарий ↗</button>
+                </form>
+            @endcan
+        @else
+            <p class="comment-hint">Чтобы добавить комментарий, <a href="{{ route('login') }}">войдите в аккаунт</a>.</p>
+        @endauth
+
+        @forelse ($comments as $comment)
+            <article class="comment-item" id="comment-{{ $comment->id }}">
+                <div class="comment-meta">
+                    <strong>{{ $comment->user->name }}</strong>
+                    <time datetime="{{ $comment->created_at->toIso8601String() }}">{{ $comment->created_at->format('d.m.Y H:i') }}</time>
+                </div>
+                <p>{{ $comment->body }}</p>
+                @can('update', $comment)
+                    <div class="comment-actions">
+                        <a href="{{ route('comments.edit', $comment) }}">Изменить</a>
+                        <form method="post" action="{{ route('comments.destroy', $comment) }}" onsubmit="return confirm('Удалить комментарий?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Удалить</button>
+                        </form>
+                    </div>
+                @endcan
+            </article>
+        @empty
+            <p class="comment-hint">Комментариев пока нет. Можно начать обсуждение.</p>
+        @endforelse
+    </section>
+
 </section>
 @endsection

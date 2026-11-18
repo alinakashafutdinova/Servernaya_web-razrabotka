@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserSessionController;
@@ -47,11 +48,20 @@ Route::post('/logout', [UserSessionController::class, 'logout'])->middleware('au
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/management', [NewsController::class, 'manage'])->name('news.manage');
-Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
-Route::post('/news', [NewsController::class, 'store'])->name('news.store');
-Route::get('/news/{article}/edit', [NewsController::class, 'edit'])->whereNumber('article')->name('news.edit');
-Route::put('/news/{article}', [NewsController::class, 'update'])->whereNumber('article')->name('news.update');
-Route::delete('/news/{article}', [NewsController::class, 'destroy'])->whereNumber('article')->name('news.destroy');
+    Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
+    Route::post('/news', [NewsController::class, 'store'])->name('news.store');
+    Route::get('/news/{article}/edit', [NewsController::class, 'edit'])->whereNumber('article')->name('news.edit');
+    Route::put('/news/{article}', [NewsController::class, 'update'])->whereNumber('article')->name('news.update');
+    Route::delete('/news/{article}', [NewsController::class, 'destroy'])->whereNumber('article')->name('news.destroy');
+
+    Route::post('/news/{article}/comments', [CommentController::class, 'store'])
+        ->whereNumber('article')->name('comments.store');
+    Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])
+        ->whereNumber('comment')->name('comments.edit');
+    Route::put('/comments/{comment}', [CommentController::class, 'update'])
+        ->whereNumber('comment')->name('comments.update');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
+        ->whereNumber('comment')->name('comments.destroy');
 });
 
 Route::get('/news/{article}', [NewsController::class, 'show'])->whereNumber('article')->name('news.show');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,10 @@ class UserSessionController extends Controller
             'password' => ['required', 'string', Password::min(8), 'max:72', 'confirmed'],
         ]);
 
+        $reader = Role::firstOrCreate(['slug' => Role::READER], ['name' => 'Читатель']);
+
         User::create([
+            'role_id' => $reader->id,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),

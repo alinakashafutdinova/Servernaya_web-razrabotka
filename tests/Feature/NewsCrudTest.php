@@ -15,7 +15,9 @@ class NewsCrudTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $role = \App\Models\Role::firstOrCreate(['slug' => 'moderator'], ['name' => 'Модератор']);
         $this->actingAs(User::create([
+            'role_id' => $role->id,
             'name' => 'Алина',
             'email' => 'admin@example.test',
             'password' => \Illuminate\Support\Facades\Hash::make('StrongPass123!'),

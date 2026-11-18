@@ -59,7 +59,7 @@ class AuthSanctumTest extends TestCase
         $this->assertAuthenticated();
         $this->assertDatabaseCount('personal_access_tokens', 1);
         $this->assertNotNull(session('sanctum_token_id'));
-        $this->get('/management')->assertOk();
+        $this->get('/management')->assertForbidden()->assertSeeText('Управление статьями доступно только модератору.');
         $this->post('/logout')->assertRedirect(route('home'));
         $this->assertGuest('web');
         $this->assertDatabaseCount('personal_access_tokens', 0);

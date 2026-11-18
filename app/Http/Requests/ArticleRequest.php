@@ -3,11 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Article;
+use Illuminate\Support\Facades\Gate;
 
 class ArticleRequest extends FormRequest
 {
     public function authorize(): bool
     {
+        $article = $this->route('article');
+        Gate::authorize($article instanceof Article ? 'update' : 'create', $article ?? Article::class);
         return true;
     }
 

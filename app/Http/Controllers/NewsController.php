@@ -22,7 +22,7 @@ class NewsController extends Controller
 
     public function show(Article $article): View
     {
-        abort_unless($article->is_published, 404);
+        $this->authorize('view', $article);
 
         $relatedArticles = Article::query()
             ->where('is_published', true)
@@ -32,48 +32,52 @@ class NewsController extends Controller
             ->limit(3)
             ->get();
 
-        return view('news.show', compact('article', 'relatedArticles'));
+        $comments = $article->comments()->with('user')->orderByDesc('created_at')->orderByDesc('id')->get();
+
+        return view('news.show', compact('article', 'relatedArticles', 'comments'));
     }
 
     public function manage(): View
     {
+        $this->authorize('viewManagement', Article::class);
         $articles = Article::query()->orderByDesc('id')->paginate(8);
-
         return view('news.manage', compact('articles'));
     }
 
     public function create(): View
     {
+        $this->authorize('create', Article::class);
         return view('news.create');
     }
 
     public function store(ArticleRequest $request): RedirectResponse
     {
+        $this->authorize('create', Article::class);
         $data = $request->validated();
         $data['is_published'] = $request->boolean('is_published');
         Article::create($data);
-
         return redirect()->route('news.manage')->with('status', 'Статья успешно добавлена.');
     }
 
     public function edit(Article $article): View
     {
+        $this->authorize('update', $article);
         return view('news.edit', compact('article'));
     }
 
     public function update(ArticleRequest $request, Article $article): RedirectResponse
     {
+        $this->authorize('update', $article);
         $data = $request->validated();
         $data['is_published'] = $request->boolean('is_published');
         $article->update($data);
-
         return redirect()->route('news.manage')->with('status', 'Изменения сохранены.');
     }
 
     public function destroy(Article $article): RedirectResponse
     {
+        $this->authorize('delete', $article);
         $article->delete();
-
         return redirect()->route('news.manage')->with('status', 'Статья удалена.');
     }
 }
