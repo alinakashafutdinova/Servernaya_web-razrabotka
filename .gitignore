@@ -21,3 +21,6 @@
 /storage/logs/*
 !/storage/logs/.gitignore
 /bootstrap/cache/*.php
+
+/database/*.sqlite
+/database/*.sqlite-*

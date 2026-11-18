@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'index'])->name('home');
@@ -32,3 +33,6 @@ Route::get('/contacts', function () {
 
 Route::get('/signin', [AuthController::class, 'create'])->name('signin.create');
 Route::post('/signin', [AuthController::class, 'registration'])->name('signin.registration');
+
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{article}', [NewsController::class, 'show'])->whereNumber('article')->name('news.show');

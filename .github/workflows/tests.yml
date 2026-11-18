@@ -32,6 +32,11 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
+      - name: Проверить миграцию и наполнение базы
+        run: |
+          touch database/database.sqlite
+          php artisan migrate:fresh --seed --force
+
       - name: Выполнить тесты
         run: php artisan test
 
