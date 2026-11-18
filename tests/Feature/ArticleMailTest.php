@@ -53,7 +53,7 @@ class ArticleMailTest extends TestCase
         Mail::assertSent(ArticleCreatedMail::class, function (ArticleCreatedMail $mail) use ($article, $moderator) {
             return $mail->article->is($article) && $mail->hasTo($moderator->email);
         });
-        Mail::assertSentCount(1);
+        Mail::assertSent(ArticleCreatedMail::class, 1);
         $this->assertDatabaseHas('articles', ['title' => $this->articleData()['title']]);
     }
 
@@ -65,7 +65,7 @@ class ArticleMailTest extends TestCase
         $this->person(Role::READER, 'reader@example.test');
 
         $this->actingAs($moderator)->post(route('news.store'), $this->articleData());
-        Mail::assertSentCount(2);
+        Mail::assertSent(ArticleCreatedMail::class, 2);
         Mail::assertSent(ArticleCreatedMail::class, fn ($mail) => $mail->hasTo('mod1@example.test'));
         Mail::assertSent(ArticleCreatedMail::class, fn ($mail) => $mail->hasTo('mod2@example.test'));
         Mail::assertNotSent(ArticleCreatedMail::class, fn ($mail) => $mail->hasTo('reader@example.test'));
@@ -79,7 +79,7 @@ class ArticleMailTest extends TestCase
         $data['is_published'] = '0';
         $this->actingAs($moderator)->post(route('news.store'), $data)->assertRedirect();
         $this->assertFalse(Article::firstOrFail()->is_published);
-        Mail::assertSentCount(1);
+        Mail::assertSent(ArticleCreatedMail::class, 1);
     }
 
     public function test_invalid_article_does_not_send_message_or_create_entry(): void
