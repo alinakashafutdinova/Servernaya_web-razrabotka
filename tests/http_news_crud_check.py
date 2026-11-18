@@ -75,7 +75,7 @@ status, headers, _ = request('/login', {
     'password': 'StrongPass123!',
     '_token': login_token,
 })
-assert status == 302 and headers.get('Location', '').endswith('/'), 'Вход не сработал'
+assert status == 302 and urllib.parse.urlsplit(headers.get('Location', '')).path in ('', '/'), 'Вход не сработал'
 connection = sqlite3.connect(Path(__file__).resolve().parents[1] / 'database/database.sqlite')
 try:
     count = connection.execute('SELECT COUNT(*) FROM personal_access_tokens').fetchone()[0]
@@ -122,7 +122,7 @@ print('HTTP CRUD + CSRF: проверка создания, обновления
 
 logout_token = csrf_token('/management')
 status, headers, _ = request('/logout', {'_token': logout_token})
-assert status == 302 and headers.get('Location', '').endswith('/'), 'Выход не сработал'
+assert status == 302 and urllib.parse.urlsplit(headers.get('Location', '')).path in ('', '/'), 'Выход не сработал'
 connection = sqlite3.connect(Path(__file__).resolve().parents[1] / 'database/database.sqlite')
 try:
     count = connection.execute('SELECT COUNT(*) FROM personal_access_tokens').fetchone()[0]
