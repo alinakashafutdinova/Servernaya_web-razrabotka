@@ -99,7 +99,7 @@ class RegistrationTest extends TestCase
 
     public function test_navigation_contains_registration_link_and_other_pages_still_work(): void
     {
-        $this->get('/')->assertOk()->assertSee('/signin');
+        $this->get('/')->assertOk()->assertSee('/register');
         $this->get('/about')->assertOk();
         $this->get('/contacts')->assertOk();
         $this->get('/galery/1')->assertOk();

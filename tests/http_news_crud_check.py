@@ -50,12 +50,40 @@ def article_id(title):
 
 for attempt in range(30):
     try:
-        token = csrf_token('/news/create')
-        break
+        status, _, _ = request('/register')
+        if status == 200:
+            break
     except urllib.error.URLError:
         time.sleep(.2)
 else:
     raise RuntimeError('HTTP-сервер не запустился')
+
+status, headers, _ = request('/management')
+assert status == 302 and '/login' in headers.get('Location', ''), 'Управление должно требовать входа'
+register_token = csrf_token('/register')
+status, headers, _ = request('/register', {
+    'name': 'Редактор',
+    'email': 'editor-crud@example.test',
+    'password': 'StrongPass123!',
+    'password_confirmation': 'StrongPass123!',
+    '_token': register_token,
+})
+assert status == 302 and '/login' in headers.get('Location', ''), 'Регистрация не создала пользователя'
+login_token = csrf_token('/login')
+status, headers, _ = request('/login', {
+    'email': 'editor-crud@example.test',
+    'password': 'StrongPass123!',
+    '_token': login_token,
+})
+assert status == 302 and headers.get('Location', '').endswith('/'), 'Вход не сработал'
+connection = sqlite3.connect(Path(__file__).resolve().parents[1] / 'database/database.sqlite')
+try:
+    count = connection.execute('SELECT COUNT(*) FROM personal_access_tokens').fetchone()[0]
+    assert count == 1, 'Sanctum должен выдать токен'
+finally:
+    connection.close()
+
+token = csrf_token('/news/create')
 
 form = {
     'title': 'Автоматическая проверка CRUD',
@@ -91,3 +119,16 @@ status, _, _ = request(f'/news/{id}', {'_method': 'DELETE', '_token': token})
 assert status == 302, ('Удаление', status)
 assert article_id(updated_title) is None, 'Статья не удалена'
 print('HTTP CRUD + CSRF: проверка создания, обновления, удаления и защиты пройдена')
+
+logout_token = csrf_token('/management')
+status, headers, _ = request('/logout', {'_token': logout_token})
+assert status == 302 and headers.get('Location', '').endswith('/'), 'Выход не сработал'
+connection = sqlite3.connect(Path(__file__).resolve().parents[1] / 'database/database.sqlite')
+try:
+    count = connection.execute('SELECT COUNT(*) FROM personal_access_tokens').fetchone()[0]
+    assert count == 0, 'Sanctum-токен не удалён после выхода'
+finally:
+    connection.close()
+status, headers, _ = request('/management')
+assert status == 302 and '/login' in headers.get('Location', ''), 'После выхода управление должно закрыться'
+print('HTTP Auth + Sanctum: регистрация, вход, токен, выход и защита проверены')

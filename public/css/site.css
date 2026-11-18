@@ -414,3 +414,11 @@ h1,h2,h3,p { margin-top: 0; }
 @media (max-width: 520px) {
     .nav-link { flex: 1 1 calc(50% - 8px); font-size: 12px; }
 }
+
+/* Формы входа и регистрации */
+.account-page { padding-top: 75px; padding-bottom: 95px; }
+.auth-inline-link { color: var(--pink-deep); font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.auth-notice { background: #fff0f5; border: 1px solid #f9c1d7; padding: 14px 18px; border-radius: 13px; margin: 20px 0; font-size: 14px; color: #783e58; }
+.nav-logout-form { display: contents; }
+.nav-logout { font-family: inherit; border: 0; background: transparent; cursor: pointer; white-space: nowrap; }
+@media (max-width: 640px) { .account-page { padding-top: 38px; padding-bottom: 65px; } }

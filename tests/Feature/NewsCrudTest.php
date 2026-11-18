@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Tests\TestCase;
@@ -10,6 +11,16 @@ use Tests\TestCase;
 class NewsCrudTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->actingAs(User::create([
+            'name' => 'Алина',
+            'email' => 'admin@example.test',
+            'password' => \Illuminate\Support\Facades\Hash::make('StrongPass123!'),
+        ]));
+    }
 
     private function validArticle(): array
     {
