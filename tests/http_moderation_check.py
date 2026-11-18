@@ -57,7 +57,7 @@ else:
     raise RuntimeError('Не запустился тестовый сервер')
 
 assert request(visitor, '/moderation')[0] == 302
-assert request(visitor, '/comments/1/approve', {'_method':'PATCH'})[0] == 302
+assert request(visitor, '/comments/1/approve', {'_method':'PATCH'})[0] == 419  # Без CSRF
 register_csrf = csrf(reader, '/register')
 status, headers, _ = request(reader, '/register', {
     '_token': register_csrf,
