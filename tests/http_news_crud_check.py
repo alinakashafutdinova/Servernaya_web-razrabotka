@@ -1,5 +1,6 @@
 """Проверка CRUD-форм и CSRF через настоящий HTTP-сервер."""
 import http.cookiejar
+import os
 import re
 import sqlite3
 import time
@@ -83,6 +84,25 @@ try:
 finally:
     connection.close()
 
+# Читатель может просматривать новости, но не может открывать CRUD.
+status, _, denied_body = request('/management')
+assert status == 403 and 'Управление статьями доступно только модератору.' in denied_body, 'У читателя есть права модератора'
+assert request('/news')[0] == 200
+logout_token = csrf_token('/news/1')
+status, headers, _ = request('/logout', {'_token': logout_token})
+assert status == 302, 'Читателю не удалось выйти'
+
+# Роль модератора заполняется сидером с паролем, заданным только в CI.
+moderator_email = os.environ.get('MODERATOR_EMAIL', 'moderator@example.test')
+moderator_password = os.environ['MODERATOR_PASSWORD']
+login_token = csrf_token('/login')
+status, headers, _ = request('/login', {
+    'email': moderator_email,
+    'password': moderator_password,
+    '_token': login_token,
+})
+assert status == 302, ('Модератор не вошёл', status)
+
 token = csrf_token('/news/create')
 
 form = {
@@ -110,7 +130,8 @@ updated_title = 'Статья после HTTP-редактирования'
 status, _, _ = request(f'/news/{id}', {**form, 'title': updated_title, '_token': token, '_method': 'PUT', 'is_published': '0'})
 assert status == 302, ('Редактирование', status)
 assert article_id(updated_title) == id, 'Редактирование не сохранено'
-assert request(f'/news/{id}')[0] == 404, 'Черновик доступен публично'
+assert request(f'/news/{id}')[0] == 200, 'Модератор не может открыть черновик'
+assert updated_title not in request('/news')[2], 'Черновик виден в публичном списке'
 
 status, _, _ = request(f'/news/{id}', {'_method': 'DELETE'})
 assert status == 419, ('Удаление без CSRF', status)

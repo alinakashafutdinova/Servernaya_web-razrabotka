@@ -30,6 +30,7 @@ jobs:
       - name: Подготовить окружение
         run: |
           cp .env.example .env
+          echo "MODERATOR_PASSWORD=$(openssl rand -hex 24)" >> "$GITHUB_ENV"
           php artisan key:generate
 
       - name: Проверить миграцию и наполнение базы
