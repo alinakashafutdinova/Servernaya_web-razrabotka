@@ -22,6 +22,17 @@ class NewsController extends Controller
     {
         abort_unless($article->is_published, 404);
 
-        return view('news.show', ['article' => $article]);
+        $relatedArticles = Article::query()
+            ->where('is_published', true)
+            ->where('id', '!=', $article->id)
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
+            ->limit(3)
+            ->get();
+
+        return view('news.show', [
+            'article' => $article,
+            'relatedArticles' => $relatedArticles,
+        ]);
     }
 }
