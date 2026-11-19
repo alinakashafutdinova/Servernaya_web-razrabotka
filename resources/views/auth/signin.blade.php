@@ -5,7 +5,7 @@
 @section('content')
 <section class="signup-page container">
     <div class="signup-intro">
-        <span class="eyebrow"><span class="eyebrow-dot"></span> ЛАБОРАТОРНАЯ РАБОТА №3</span>
+        <span class="eyebrow"><span class="eyebrow-dot"></span> ЛАБОРАТОРНЫЕ РАБОТЫ №1–9</span>
         <h1>Будем <span class="serif-accent">знакомы.</span></h1>
         <p>Здесь я работаю с формами, проверкой введённых данных и защитой запросов с помощью CSRF-токена.</p>
         <div class="signup-sticker" aria-hidden="true">

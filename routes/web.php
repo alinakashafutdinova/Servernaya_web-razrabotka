@@ -24,7 +24,7 @@ Route::get('/contacts', function () {
         [
             'title' => 'Репозиторий',
             'value' => 'Серверная веб-разработка',
-            'description' => 'Исходный код лабораторной работы',
+            'description' => 'Исходный код лабораторных работ №1–9',
             'url' => 'https://github.com/alinakashafutdinova/Servernaya_web-razrabotka',
             'icon' => '02',
         ],

@@ -5,9 +5,9 @@
 @section('content')
 <section class="hero container">
     <div class="hero-content">
-        <span class="eyebrow"><span class="eyebrow-dot"></span> МОЯ ВЕБ-ЛАБОРАТОРИЯ</span>
+        <span class="eyebrow"><span class="eyebrow-dot"></span> ЛАБОРАТОРНЫЕ РАБОТЫ №1–9</span>
         <h1>Здравствуйте! Я Алина<span class="pink-period">.</span><br><span class="hero-light">Добро пожаловать!</span></h1>
-        <p class="hero-description">На этом сайте представлены мои учебные проекты по веб-разработке, практические задания и результаты работы с серверными технологиями.</p>
+        <p class="hero-description">На этом сайте представлены лабораторные работы №1–9 по серверной веб-разработке: от создания страниц до авторизации, работы с базой данных и модерации комментариев.</p>
         <div class="hero-actions">
             <a class="button button-primary" href="{{ route('about') }}">Узнать обо мне <span aria-hidden="true">↗</span></a>
             <a class="text-link" href="#works">Смотреть работы <span aria-hidden="true">→</span></a>

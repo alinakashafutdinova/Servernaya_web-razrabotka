@@ -5,7 +5,7 @@
 @section('content')
 <section class="signup-page container account-page">
     <div class="signup-intro">
-        <span class="eyebrow"><span class="eyebrow-dot"></span> ЛАБОРАТОРНАЯ РАБОТА №6</span>
+        <span class="eyebrow"><span class="eyebrow-dot"></span> ЛАБОРАТОРНЫЕ РАБОТЫ №1–9</span>
         <h1>Регистрация <span class="serif-accent">пользователя.</span></h1>
         <p>Создайте аккаунт, чтобы читать новости и оставлять комментарии. Доступ к управлению статьями предоставляется только модератору.</p>
         <div class="signup-sticker" aria-hidden="true">

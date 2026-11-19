@@ -94,7 +94,7 @@ class RegistrationTest extends TestCase
     public function test_requested_text_changes_are_visible(): void
     {
         $this->get('/')->assertOk()->assertSeeText('Алина Кашафутдинова')->assertDontSee('Студентка · Веб-технологии · Москва');
-        $this->get('/about')->assertOk()->assertSeeText('лабораторная работа')->assertDontSee('моя первая лабораторная работа');
+        $this->get('/about')->assertOk()->assertSeeText('лабораторные работы №1–9')->assertDontSee('моя первая лабораторная работа');
     }
 
     public function test_navigation_contains_registration_link_and_other_pages_still_work(): void

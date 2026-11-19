@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#fffafc">
-    <meta name="description" content="Учебный сайт по серверной веб-разработке: главная, новости, обо мне и контакты.">
+    <meta name="description" content="Лабораторные работы №1–9 по серверной веб-разработке: статьи, авторизация, комментарии и модерация.">
     <title>@yield('title') — Алина Кашафутдинова</title>
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">
 </head>
@@ -38,7 +38,7 @@
                         <a href="{{ route('register') }}" class="nav-link {{ request()->routeIs('register', 'register.store') ? 'active' : '' }}">Регистрация</a>
                     @endauth
                 </nav>
-                <span class="header-note">09 / 09</span>
+                <span class="header-note">№1–9</span>
             </div>
         </header>
 
@@ -54,7 +54,7 @@
                     <span class="footer-separator">/</span>
                     <span>Группа 257-321</span>
                 </div>
-                <span class="footer-course">Серверная веб-разработка · Лабораторная №9</span>
+                <span class="footer-course">Серверная веб-разработка · Лабораторные работы №1–9</span>
             </div>
         </footer>
     </div>
