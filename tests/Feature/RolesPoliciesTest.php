@@ -45,6 +45,7 @@ class RolesPoliciesTest extends TestCase
     {
         $this->assertTrue(Schema::hasTable('roles'));
         $this->assertTrue(Schema::hasTable('comments'));
+        $this->assertTrue(Schema::hasTable('notifications'));
         $this->assertTrue(Schema::hasColumn('users', 'role_id'));
         $this->seed(RoleSeeder::class);
         $this->assertSame(2, Role::count());
@@ -145,25 +146,25 @@ class RolesPoliciesTest extends TestCase
         $article = Article::factory()->create();
         $comment = $article->comments()->create(['body' => 'Мой комментарий', 'user_id' => $reader->id]);
         $this->actingAs($reader);
-        $this->get('/comments/'.$comment->id.'/edit')->assertForbidden();
-        $this->put('/comments/'.$comment->id, ['body' => 'Изменённый текст'])->assertForbidden();
-        $this->delete('/comments/'.$comment->id)->assertForbidden()->assertSeeText('Удалять комментарии может только модератор.');
+        $this->get('/comments/'.$comment->id.'/edit')->assertNotFound();
+        $this->put('/comments/'.$comment->id, ['body' => 'Изменённый текст'])->assertNotFound();
+        $this->delete('/comments/'.$comment->id)->assertNotFound();
         $this->assertDatabaseHas('comments', ['id' => $comment->id, 'body' => 'Мой комментарий']);
     }
 
-    public function test_moderator_can_edit_and_delete_all_comments(): void
+    public function test_moderator_may_moderate_comments_without_rewriting_their_text(): void
     {
         $moderator = $this->actor('moderator', 'moderator6@example.test');
         $reader = $this->actor('reader', 'reader6@example.test');
         $article = Article::factory()->create();
         $comment = $article->comments()->create(['body' => 'Первый текст', 'user_id' => $reader->id]);
         $this->actingAs($moderator);
-        $this->get('/comments/'.$comment->id.'/edit')->assertOk();
-        $this->put('/comments/'.$comment->id, ['body' => 'Исправленный комментарий'])
-            ->assertRedirect(route('news.show', $article));
-        $this->assertDatabaseHas('comments', ['id' => $comment->id, 'body' => 'Исправленный комментарий']);
-        $this->delete('/comments/'.$comment->id)->assertRedirect(route('news.show', $article));
-        $this->assertDatabaseCount('comments', 0);
+        $this->get('/comments/'.$comment->id.'/edit')->assertNotFound();
+        $this->put('/comments/'.$comment->id, ['body' => 'Исправленный комментарий'])->assertNotFound();
+        $this->delete('/comments/'.$comment->id)->assertNotFound();
+        $this->assertDatabaseHas('comments', ['id' => $comment->id, 'body' => 'Первый текст']);
+        $this->patch(route('comments.approve', $comment))->assertRedirect(route('comments.moderation'));
+        $this->assertDatabaseHas('comments', ['id' => $comment->id, 'body' => 'Первый текст', 'is_approved' => 1]);
     }
 
     public function test_guests_and_readers_cannot_comment_on_drafts(): void
@@ -199,7 +200,7 @@ class RolesPoliciesTest extends TestCase
 
     public function test_role_associations_and_moderator_guard_on_routes(): void
     {
-        foreach (['comments.store', 'comments.edit', 'comments.update', 'comments.destroy', 'news.manage', 'news.create', 'news.store'] as $name) {
+        foreach (['comments.store', 'comments.moderation', 'comments.approve', 'comments.reject', 'account', 'account.notifications.read', 'news.manage', 'news.create', 'news.store'] as $name) {
             $route = Route::getRoutes()->getByName($name);
             $this->assertNotNull($route);
             $this->assertContains('auth:sanctum', $route->gatherMiddleware());
