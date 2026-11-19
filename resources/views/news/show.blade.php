@@ -75,16 +75,7 @@
                     <time datetime="{{ $comment->created_at->toIso8601String() }}">{{ $comment->created_at->format('d.m.Y H:i') }}</time>
                 </div>
                 <p>{{ $comment->body }}</p>
-                @can('update', $comment)
-                    <div class="comment-actions">
-                        <a href="{{ route('comments.edit', $comment) }}">Изменить</a>
-                        <form method="post" action="{{ route('comments.destroy', $comment) }}" onsubmit="return confirm('Удалить комментарий?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Удалить</button>
-                        </form>
-                    </div>
-                @endcan
+
             </article>
         @empty
             <p class="comment-hint">Комментариев пока нет. Можно начать обсуждение.</p>

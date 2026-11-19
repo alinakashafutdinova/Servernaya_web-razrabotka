@@ -6,11 +6,17 @@
 <section class="hero container">
     <div class="hero-content">
         <span class="eyebrow"><span class="eyebrow-dot"></span> ЛАБОРАТОРНЫЕ РАБОТЫ №1–9</span>
-        <h1>Здравствуйте! Я Алина<span class="pink-period">.</span><br><span class="hero-light">Добро пожаловать!</span></h1>
+        <h1><span class="hero-hello">Здравствуйте!</span><br><span class="hero-name">Я Алина<span class="pink-period">.</span></span><br><span class="hero-light">Добро пожаловать!</span></h1>
+        @if (session('welcome'))
+            <p class="hero-welcome-notice" role="status">{{ session('welcome') }}</p>
+        @endif
+        @auth
+            <div class="hero-login-state" role="status"><span class="hero-online-dot" aria-hidden="true"></span> Вы вошли как <strong>{{ auth()->user()->name }}</strong> · <a href="{{ route('account') }}">Мой профиль</a></div>
+        @endauth
         <p class="hero-description">На этом сайте представлены лабораторные работы №1–9 по серверной веб-разработке: от создания страниц до авторизации, работы с базой данных и модерации комментариев.</p>
         <div class="hero-actions">
             <a class="button button-primary" href="{{ route('about') }}">Узнать обо мне <span aria-hidden="true">↗</span></a>
-            <a class="text-link" href="#works">Смотреть работы <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href="#works">Смотреть работы <span aria-hidden="true">↗</span></a>
         </div>
         <div class="hero-micro"><span class="micro-line"></span> Алина Кашафутдинова</div>
     </div>
