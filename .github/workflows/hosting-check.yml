@@ -81,7 +81,7 @@ jobs:
           docker run -d --name infinityfree-mariadb-test -e MARIADB_ROOT_PASSWORD=temporary-check -e MARIADB_DATABASE=infinityfree_demo mariadb:10.6
           trap 'docker rm -f infinityfree-mariadb-test >/dev/null 2>&1 || true' EXIT
           for i in $(seq 1 45); do
-            if docker exec infinityfree-mariadb-test mariadb-admin ping -uroot -ptemporary-check --silent; then break; fi
+            if docker exec infinityfree-mariadb-test mariadb -uroot -ptemporary-check -e "SELECT 1" >/dev/null 2>&1; then break; fi
             sleep 2
           done
           docker exec -i infinityfree-mariadb-test mariadb -uroot -ptemporary-check infinityfree_demo < infinityfree_init.sql
