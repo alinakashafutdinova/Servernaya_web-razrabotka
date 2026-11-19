@@ -124,8 +124,10 @@ class CommentModerationTest extends TestCase
         $comment = $this->comment($article, $reader, 'Комментарий к публикации');
         $this->actingAs($moderator)->patch(route('comments.approve', $comment))
             ->assertRedirect(route('comments.moderation'))
-            ->assertSessionHas('status', 'Комментарий опубликован.');
+            ->assertSessionHas('status', 'Комментарий опубликован. Автор получил уведомление в своём профиле.');
         $this->assertDatabaseHas('comments', ['id' => $comment->id, 'is_approved' => 1]);
+        $this->assertDatabaseHas('notifications', ['notifiable_id' => $reader->id, 'notifiable_type' => User::class]);
+        $this->actingAs($reader)->get(route('account'))->assertOk()->assertSeeText('Комментарий опубликован');
         $this->get(route('news.show', $article))->assertSeeText('Комментарий к публикации');
         $this->get(route('comments.moderation'))->assertDontSeeText('Комментарий к публикации');
     }
@@ -138,8 +140,10 @@ class CommentModerationTest extends TestCase
         $comment = $this->comment($article, $reader, 'Отклоняемый текст');
         $this->actingAs($moderator)->delete(route('comments.reject', $comment))
             ->assertRedirect(route('comments.moderation'))
-            ->assertSessionHas('status', 'Комментарий отклонён и удалён.');
+            ->assertSessionHas('status', 'Комментарий отклонён и удалён. Автор получил уведомление в своём профиле.');
         $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
+        $this->assertDatabaseHas('notifications', ['notifiable_id' => $reader->id, 'notifiable_type' => User::class]);
+        $this->actingAs($reader)->get(route('account'))->assertOk()->assertSeeText('Комментарий отклонён');
         $this->get(route('news.show', $article))->assertDontSeeText('Отклоняемый текст');
     }
 
