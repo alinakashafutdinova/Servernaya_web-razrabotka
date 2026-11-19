@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#fffafc">
     <meta name="description" content="Лабораторные работы №1–9 по серверной веб-разработке: статьи, авторизация, комментарии и модерация.">
     <title>@yield('title') — Алина Кашафутдинова</title>
-    <link rel="stylesheet" href="{{ asset('css/site.css') }}?v=20261119b">
+    <link rel="stylesheet" href="{{ asset('css/site.css') }}?v=20261119c">
 </head>
 <body>
     <div class="site-shell">
@@ -45,7 +45,13 @@
                             <a href="{{ route('news.manage') }}" class="nav-link {{ request()->routeIs('news.manage', 'news.edit') ? 'active' : '' }}">Управление</a>
                         @endcan
                         @can('manage-comments')
-                            <a href="{{ route('comments.moderation') }}" class="nav-link {{ request()->routeIs('comments.moderation') ? 'active' : '' }}">Модерация</a>
+                            @php($pendingComments = App\Models\Comment::where('is_approved', false)->count())
+                            <a href="{{ route('comments.moderation') }}" class="nav-link {{ request()->routeIs('comments.moderation') ? 'active' : '' }}">
+                                Модерация
+                                @if ($pendingComments > 0)
+                                    <span class="notice-count" aria-label="Комментариев на модерации: {{ $pendingComments }}">{{ $pendingComments }}</span>
+                                @endif
+                            </a>
                         @endcan
                         <a href="{{ route('account') }}" class="nav-link nav-notifications {{ request()->routeIs('account') ? 'active' : '' }}">
                             Мой профиль
