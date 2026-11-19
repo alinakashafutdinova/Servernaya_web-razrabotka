@@ -80,9 +80,16 @@ jobs:
         run: |
           composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
           mkdir -p /tmp/hosting-build
-          rsync -a --exclude='.git' --exclude='.github' --exclude='.env' --exclude='tests' --exclude='.phpunit.result.cache' --exclude='storage/logs/*.log' ./ /tmp/hosting-build/site/
+          rsync -a --exclude='.git' --exclude='.github' --exclude='.env' --exclude='infinityfree_init.sql' --exclude='tests' --exclude='.phpunit.result.cache' --exclude='storage/logs/*.log' ./ /tmp/hosting-build/site/
           cd /tmp/hosting-build
           zip -rq "${GITHUB_WORKSPACE}/laravel13-hosting-ready.zip" site
+      - name: SQL для импорта в phpMyAdmin InfinityFree
+        if: matrix.php == '8.3'
+        uses: actions/upload-artifact@v4
+        with:
+          name: infinityfree-database-sql
+          path: infinityfree_init.sql
+          retention-days: 30
       - name: Архив для скачивания (Actions → Artifacts)
         if: matrix.php == '8.3'
         uses: actions/upload-artifact@v4
