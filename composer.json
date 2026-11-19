@@ -1,23 +1,19 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
     "name": "alina/servernaya-web-razrabotka",
-    "type": "project",
     "description": "Лабораторные работы №1–9 по серверной веб-разработке",
-    "keywords": [
-        "laravel",
-        "blade",
-        "routes"
-    ],
+    "type": "project",
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
-        "laravel/framework": "^9.0",
-        "laravel/sanctum": "^3.3"
+        "php": "^8.3",
+        "laravel/framework": "^13.17",
+        "laravel/sanctum": "^4.5",
+        "fakerphp/faker": "^1.23"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5.10",
-        "nunomaduro/collision": "^6.0",
-        "fakerphp/faker": "^1.21",
-        "mockery/mockery": "^1.5"
+        "phpunit/phpunit": "^12.5",
+        "nunomaduro/collision": "^8.6",
+        "mockery/mockery": "^1.6"
     },
     "autoload": {
         "psr-4": {
@@ -35,6 +31,9 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ]
     },
     "config": {
@@ -42,10 +41,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "platform": {
-            "php": "8.0.28"
-        },
-        "allow-plugins": {
-            "php-http/discovery": true
+            "php": "8.3.0"
         }
     },
     "minimum-stability": "stable",

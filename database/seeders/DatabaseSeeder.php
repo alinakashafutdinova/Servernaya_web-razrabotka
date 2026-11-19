@@ -10,6 +10,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([RoleSeeder::class, ModeratorSeeder::class]);
-        Article::factory()->count(12)->create();
+        if (Article::query()->doesntExist()) {
+            Article::factory()->count(12)->create();
+        }
     }
 }

@@ -13,7 +13,11 @@ class ModeratorSeeder extends Seeder
     {
         $role = Role::where('slug', Role::MODERATOR)->firstOrFail();
         $email = env('MODERATOR_EMAIL', 'moderator@example.test') ?: 'moderator@example.test';
-        $password = env('MODERATOR_PASSWORD') ?: bin2hex(random_bytes(18));
+        $password = env('MODERATOR_PASSWORD');
+        if (app()->environment('production') && (!$password || strlen($password) < 12)) {
+            throw new \RuntimeException('Для установки модератора укажите MODERATOR_PASSWORD (не менее 12 символов) в .env.');
+        }
+        $password = $password ?: bin2hex(random_bytes(18));
         $user = User::where('email', $email)->first();
 
         if ($user === null) {

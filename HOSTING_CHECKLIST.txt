@@ -1,0 +1,15 @@
+Проверка перед запуском
+[ ] Установлен PHP 8.3/8.4 и Composer 2
+[ ] У домена Document Root указывает на /public
+[ ] Папка vendor присутствует
+[ ] Есть MySQL и данные подключения в .env
+[ ] .env не доступен через браузер (проверка должна возвращать 404/403)
+[ ] APP_ENV=production, APP_DEBUG=false, APP_URL=https://...
+[ ] Сгенерирован APP_KEY (php artisan key:generate)
+[ ] Каталоги storage и bootstrap/cache доступны для записи PHP
+[ ] Запущены migrate --force и однократно db:seed
+[ ] Задан сложный пароль модератора
+[ ] Работают статьи, регистрация, комментарии, модерация
+[ ] HTTPS и SESSION_SECURE_COOKIE=true
+[ ] Проверена исходящая SMTP-почта (либо временно MAIL_MAILER=log)
+[ ] Создано резервное копирование базы MySQL
