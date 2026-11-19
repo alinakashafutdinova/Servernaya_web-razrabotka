@@ -6,7 +6,7 @@
 <section class="inner-hero container contact-hero">
     <div class="inner-copy">
         <span class="eyebrow"><span class="eyebrow-dot"></span> НА СВЯЗИ</span>
-        <h1>Давайте <span class="serif-accent">знакомиться.</span></h1>
+        <h1>Контактная <span class="serif-accent">информация.</span></h1>
         <p class="inner-lead">Здесь собрала ссылки, по которым можно посмотреть мои проекты и узнать, над чем я работаю.</p>
     </div>
     <div class="contact-art" aria-hidden="true"><span>↗</span></div>

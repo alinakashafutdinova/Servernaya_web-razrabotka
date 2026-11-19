@@ -17,7 +17,7 @@ class CommentController extends Controller
         $data = $request->validate([
             'body' => ['required', 'string', 'min:3', 'max:1000'],
         ], [
-            'body.required' => 'Напиши текст комментария.',
+            'body.required' => 'Введите текст комментария.',
             'body.min' => 'Комментарий должен содержать не менее 3 символов.',
             'body.max' => 'Комментарий не должен превышать 1000 символов.',
         ]);

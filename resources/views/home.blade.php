@@ -6,8 +6,8 @@
 <section class="hero container">
     <div class="hero-content">
         <span class="eyebrow"><span class="eyebrow-dot"></span> МОЯ ВЕБ-ЛАБОРАТОРИЯ</span>
-        <h1>Привет, я Алина<span class="pink-period">.</span><br><span class="hero-light">Рада знакомству!</span></h1>
-        <p class="hero-description">Это мой небольшой уголок в интернете. Здесь я учусь веб-разработке, пробую новые идеи и постепенно превращаю их в работающие страницы.</p>
+        <h1>Здравствуйте! Я Алина<span class="pink-period">.</span><br><span class="hero-light">Добро пожаловать!</span></h1>
+        <p class="hero-description">На этом сайте представлены мои учебные проекты по веб-разработке, практические задания и результаты работы с серверными технологиями.</p>
         <div class="hero-actions">
             <a class="button button-primary" href="{{ route('about') }}">Узнать обо мне <span aria-hidden="true">↗</span></a>
             <a class="text-link" href="#works">Смотреть работы <span aria-hidden="true">→</span></a>
@@ -44,7 +44,7 @@
             <div>
                 <span class="eyebrow"><span class="eyebrow-dot"></span> ДАННЫЕ ИЗ JSON</span>
                 <h2>Статьи <span class="serif-accent">из файла</span></h2>
-                <p>Небольшая подборка статей. Заголовки, даты, описания и изображения автоматически загружаются из JSON. Нажми на превью, чтобы открыть полноразмерное изображение.</p>
+                <p>Небольшая подборка статей. Заголовки, даты, описания и изображения автоматически загружаются из JSON. Нажмите на превью, чтобы открыть полноразмерное изображение.</p>
             </div>
             <span class="projects-count">{{ count($articles) }} / статей</span>
         </div>

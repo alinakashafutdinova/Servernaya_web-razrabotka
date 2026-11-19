@@ -8,7 +8,7 @@ class PageRoutesTest extends TestCase
 {
     public function test_home_page_is_available(): void
     {
-        $this->get('/')->assertOk()->assertSee('Привет, я Алина');
+        $this->get('/')->assertOk()->assertSee('Здравствуйте! Я Алина');
     }
 
     public function test_about_page_is_available(): void

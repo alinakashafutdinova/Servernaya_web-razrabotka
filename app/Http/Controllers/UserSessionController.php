@@ -35,7 +35,7 @@ class UserSessionController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        return redirect()->route('login')->with('status', 'Профиль создан. Теперь войди в аккаунт.');
+        return redirect()->route('login')->with('status', 'Профиль создан. Теперь войдите в аккаунт.');
     }
 
     public function loginForm(): View

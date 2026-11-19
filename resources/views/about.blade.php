@@ -7,7 +7,7 @@
     <div class="inner-copy">
         <span class="eyebrow"><span class="eyebrow-dot"></span> ЗНАКОМСТВО</span>
         <h1>Немного <span class="serif-accent">обо мне.</span></h1>
-        <p class="inner-lead">Я Алина, учусь на направлении «Веб-технологии» в Московском политехническом университете.</p>
+        <p class="inner-lead">Я Алина, учусь на направлении «Веб-технологии» в Московском Политехническом Университете.</p>
     </div>
     <div class="inner-deco" aria-hidden="true"><span class="deco-sun">✳</span><span class="deco-label">HELLO<br>THERE!</span></div>
 </section>
@@ -21,6 +21,6 @@
         <div><span>УНИВЕРСИТЕТ</span><strong>Московский Политех</strong></div>
         <div><span>ИЗУЧАЮ</span><strong>PHP · Laravel · Blade</strong></div>
     </div>
-    <div class="bottom-cta"><span>Продолжим знакомство?</span><a class="button button-primary" href="{{ route('contacts') }}">Перейти к контактам <span aria-hidden="true">↗</span></a></div>
+    <div class="bottom-cta"><span>Контактная информация</span><a class="button button-primary" href="{{ route('contacts') }}">Перейти к контактам <span aria-hidden="true">↗</span></a></div>
 </section>
 @endsection

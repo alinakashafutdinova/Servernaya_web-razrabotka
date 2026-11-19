@@ -24,13 +24,13 @@
             <span class="signup-card-icon" aria-hidden="true">✳</span>
         </div>
         <h2>Создать <span>профиль</span></h2>
-        <p class="signup-card-lead">Введи данные, и я покажу, как сервер их обрабатывает.</p>
+        <p class="signup-card-lead">Введите данные для проверки серверной обработки формы.</p>
 
         <form method="post" action="{{ route('signin.registration') }}" class="signup-form">
             @csrf
             <div class="signup-field">
                 <label for="name">Имя <span>*</span></label>
-                <input id="name" name="name" type="text" value="{{ old('name') }}" placeholder="Как тебя зовут?" autocomplete="name" maxlength="80" required @error('name') aria-invalid="true" aria-describedby="name-error" @enderror>
+                <input id="name" name="name" type="text" value="{{ old('name') }}" placeholder="Ваше имя" autocomplete="name" maxlength="80" required @error('name') aria-invalid="true" aria-describedby="name-error" @enderror>
                 @error('name')<p class="signup-error" id="name-error">{{ $message }}</p>@enderror
             </div>
             <div class="signup-field">

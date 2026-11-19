@@ -18,7 +18,7 @@
     @endif
 
     @if ($articles->isEmpty())
-        <div class="news-empty"><h2>Записей пока нет</h2><p>Нажми «Новая статья», чтобы добавить первую запись.</p></div>
+        <div class="news-empty"><h2>Записей пока нет</h2><p>Нажмите «Новая статья», чтобы добавить первую запись.</p></div>
     @else
         <div class="admin-list">
             @foreach ($articles as $article)

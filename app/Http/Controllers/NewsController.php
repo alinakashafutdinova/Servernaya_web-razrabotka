@@ -73,7 +73,7 @@ class NewsController extends Controller
             report($exception);
 
             return redirect()->route('news.manage')
-                ->with('status', 'Статья сохранена, но уведомление не отправлено. Проверь настройки почты.');
+                ->with('status', 'Статья сохранена, но уведомление не отправлено. Проверьте настройки почты.');
         }
 
         return redirect()->route('news.manage')->with('status', 'Статья успешно добавлена.');
