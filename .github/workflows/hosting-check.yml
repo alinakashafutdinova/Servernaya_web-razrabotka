@@ -71,7 +71,7 @@ jobs:
           DB_CONTAINER="$(docker ps -q --filter ancestor=mysql:8.0 | head -n 1)"
           test -n "$DB_CONTAINER"
           docker exec "$DB_CONTAINER" mysql -ulabs_test -plabs_test_password labs_testing -e "DELETE FROM personal_access_tokens; DELETE FROM comments; DELETE FROM users;"
-          docker exec "$DB_CONTAINER" mysqldump -ulabs_test -plabs_test_password --no-tablespaces --single-transaction --set-gtid-purged=OFF --skip-comments --default-character-set=utf8mb4 labs_testing > infinityfree_init.sql
+          docker exec "$DB_CONTAINER" mysqldump -ulabs_test -plabs_test_password --no-tablespaces --single-transaction --set-gtid-purged=OFF --skip-comments --default-character-set=utf8mb4 labs_testing roles users articles comments personal_access_tokens migrations > infinityfree_init.sql
           test -s infinityfree_init.sql
           ! grep -q 'ci-only-long-password-2026' infinityfree_init.sql
 
