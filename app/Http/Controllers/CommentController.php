@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Comment;
+use App\Notifications\CommentModeratedNotification;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -46,40 +48,29 @@ class CommentController extends Controller
     {
         Gate::authorize('manage-comments');
         abort_if($comment->is_approved, 404);
-        $comment->is_approved = true;
-        $comment->save();
+        DB::transaction(function () use ($comment) {
+            $comment->is_approved = true;
+            $comment->save();
+            $comment->user->notify(new CommentModeratedNotification(
+                true, $comment->article_id, $comment->article->title, $comment->body
+            ));
+        });
 
-        return redirect()->route('comments.moderation')->with('status', 'Комментарий опубликован.');
+        return redirect()->route('comments.moderation')->with('status', 'Комментарий опубликован. Автор получил уведомление в своём профиле.');
     }
 
     public function reject(Comment $comment): RedirectResponse
     {
         Gate::authorize('manage-comments');
         abort_if($comment->is_approved, 404);
-        $comment->delete();
+        DB::transaction(function () use ($comment) {
+            $comment->user->notify(new CommentModeratedNotification(
+                false, $comment->article_id, $comment->article->title, $comment->body
+            ));
+            $comment->delete();
+        });
 
-        return redirect()->route('comments.moderation')->with('status', 'Комментарий отклонён и удалён.');
+        return redirect()->route('comments.moderation')->with('status', 'Комментарий отклонён и удалён. Автор получил уведомление в своём профиле.');
     }
 
-    public function edit(Comment $comment): View
-    {
-        $this->authorize('update', $comment);
-        return view('comments.edit', compact('comment'));
-    }
-
-    public function update(Request $request, Comment $comment): RedirectResponse
-    {
-        $this->authorize('update', $comment);
-        $data = $request->validate(['body' => ['required', 'string', 'min:3', 'max:1000']]);
-        $comment->update($data);
-        return redirect()->route('news.show', $comment->article)->with('status', 'Комментарий изменён.');
-    }
-
-    public function destroy(Comment $comment): RedirectResponse
-    {
-        $this->authorize('delete', $comment);
-        $article = $comment->article;
-        $comment->delete();
-        return redirect()->route('news.show', $article)->with('status', 'Комментарий удалён.');
-    }
 }

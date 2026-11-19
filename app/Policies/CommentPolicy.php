@@ -18,11 +18,11 @@ class CommentPolicy
 
     public function update(User $user, Comment $comment): Response
     {
-        return Response::deny('Изменять комментарии может только модератор.');
+        return Response::deny('Редактирование чужих комментариев отключено. Модератор может принять или отклонить комментарий.');
     }
 
     public function delete(User $user, Comment $comment): Response
     {
-        return Response::deny('Удалять комментарии может только модератор.');
+        return Response::deny('Удаление комментариев через статью отключено. Используйте модерацию комментариев.');
     }
 }

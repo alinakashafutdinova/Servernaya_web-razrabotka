@@ -60,7 +60,7 @@ class UserSessionController extends Controller
         $token = $request->user()->createToken('Вход на сайт');
         $request->session()->put('sanctum_token_id', $token->accessToken->id);
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('welcome', 'Вход выполнен! Добро пожаловать в ваш аккаунт.');
     }
 
     public function logout(Request $request): RedirectResponse
