@@ -11,7 +11,7 @@
         <div class="signup-sticker" aria-hidden="true">
             <span class="signup-sticker-star">✳</span>
             <span>welcome<br><em>back.</em></span>
-            <span class="signup-sticker-foot">LOGIN · SESSION · SANCTUM</span>
+            <span class="signup-sticker-foot login-demo-credentials">эл. почта: moderator@mail.ru<br>пароль: moderator</span>
         </div>
     </div>
     <div class="signup-card">
