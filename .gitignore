@@ -24,3 +24,4 @@
 
 /database/*.sqlite
 /database/*.sqlite-*
+/LOCAL_LOGIN.txt
