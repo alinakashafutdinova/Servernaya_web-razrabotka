@@ -23,7 +23,12 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // Модератор проходит проверку раньше отдельных политик.
-        Gate::before(function (User $user, string $ability) {
+        Gate::before(function (User $user, string $ability, array $arguments = []) {
+            // Модератор может управлять публикацией комментария, но не изменять чужой текст.
+            if (($arguments[0] ?? null) instanceof Comment && in_array($ability, ['update', 'delete'], true)) {
+                return null;
+            }
+
             return $user->isModerator() ? true : null;
         });
 
