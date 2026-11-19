@@ -12,7 +12,7 @@ class AccountController extends Controller
     {
         return view('account.show', [
             'notifications' => $request->user()->notifications()->latest()->paginate(10, ['*'], 'notifications_page'),
-            'comments' => $request->user()->comments()->with('article')->latest()->paginate(8, ['*'], 'comments_page'),
+            'comments' => $request->user()->comments()->with('article')->latest()->orderByDesc('id')->paginate(8, ['*'], 'comments_page'),
         ]);
     }
 

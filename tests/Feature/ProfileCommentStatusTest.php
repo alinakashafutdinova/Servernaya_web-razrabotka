@@ -39,7 +39,8 @@ class ProfileCommentStatusTest extends TestCase
             'user_id' => $reader->id,
             'body' => 'Мой одобренный комментарий',
         ]);
-        $approved->update(['is_approved' => true]);
+        $approved->is_approved = true;
+        $approved->save();
         $article->comments()->create([
             'user_id' => $other->id,
             'body' => 'Чужой скрытый комментарий',
