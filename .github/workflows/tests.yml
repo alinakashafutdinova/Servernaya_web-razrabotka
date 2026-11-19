@@ -38,6 +38,11 @@ jobs:
           touch database/database.sqlite
           php artisan migrate:fresh --seed --force
 
+      - name: Проверить PHP-скрипт локальной установки
+        run: |
+          php -l scripts/setup-local.php
+          php -l app/Notifications/CommentModeratedNotification.php
+
       - name: Выполнить тесты
         run: php artisan test
 
@@ -65,3 +70,58 @@ jobs:
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
           python3 tests/http_moderation_check.py
+
+  local-ready-package:
+    name: Собрать локальный ZIP с vendor + SQLite
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - name: Получить проект
+        uses: actions/checkout@v4
+
+      - name: Подготовить PHP 8.0 и SQLite
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          tools: composer:v2
+          extensions: mbstring, xml, dom, fileinfo, pdo_sqlite
+          coverage: none
+
+      - name: Установить Composer-зависимости
+        run: |
+          composer config policy.advisories.block false
+          composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Проверить автономную установку и создание локального пользователя
+        run: |
+          php -l scripts/setup-local.php
+          php scripts/setup-local.php
+          test -s database/database.sqlite
+          test -s LOCAL_LOGIN.txt
+          test -f vendor/autoload.php
+          php artisan route:list >/tmp/local-routes.txt
+          php artisan test --filter=LocalDeploymentTest
+
+      - name: Создать portable ZIP для преподавателя (без .env и секретов)
+        run: |
+          mkdir -p /tmp/local-delivery/Servernaya_web_Laravel9_SQLite
+          rsync -a \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.env' \
+            --exclude='LOCAL_LOGIN.txt' \
+            --exclude='database/*.sqlite' \
+            --exclude='storage/logs/*.log' \
+            --exclude='.phpunit.result.cache' \
+            --exclude='bootstrap/cache/*.php' \
+            ./ /tmp/local-delivery/Servernaya_web_Laravel9_SQLite/
+          cd /tmp/local-delivery
+          zip -qr "$GITHUB_WORKSPACE/Laravel9_SQLite_local_ready.zip" Servernaya_web_Laravel9_SQLite
+          test -s "$GITHUB_WORKSPACE/Laravel9_SQLite_local_ready.zip"
+
+      - name: Приложить полный ZIP с зависимостями к Actions
+        uses: actions/upload-artifact@v4
+        with:
+          name: Laravel9_SQLite_готовый_проект
+          path: Laravel9_SQLite_local_ready.zip
+          retention-days: 30
