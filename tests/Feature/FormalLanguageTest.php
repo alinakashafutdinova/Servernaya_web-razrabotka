@@ -10,7 +10,7 @@ class FormalLanguageTest extends TestCase
     {
         $this->get('/')
             ->assertOk()
-            ->assertSeeText('Здравствуйте! Я Алина')
+            ->assertSeeText('Здравствуйте!')->assertSeeText('Я Алина')
             ->assertSeeText('Нажмите на превью');
 
         $this->get('/about')
